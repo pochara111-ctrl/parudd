@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ดีกันนะ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Mali', cursive;
+            background-color: #fdfaf6;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .float-anim {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .tear {
+            animation: fall 1.5s linear infinite;
+            opacity: 0;
+        }
+
+        .tear-delay {
+            animation: fall 1.5s linear infinite 0.75s;
+            opacity: 0;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            80% { transform: translateY(30px) scale(0.8); opacity: 1; }
+            100% { transform: translateY(40px) scale(0); opacity: 0; }
+        }
+
+        .wiggle {
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            10% { transform: rotate(-5deg); }
+            20% { transform: rotate(5deg); }
+            30% { transform: rotate(-5deg); }
+            40% { transform: rotate(5deg); }
+            50% { transform: rotate(0deg); }
+        }
+
+        .report-paper {
+            background-color: #fff;
+            /* Vertical red line at 50px, horizontal grey lines every 2.5rem */
+            background-image: 
+                linear-gradient(90deg, transparent 49px, #ff4d4d 49px, #ff4d4d 51px, transparent 51px),
+                linear-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 100% 2.5rem;
+            background-position: 0 0;
+            line-height: 2.5rem;
+            padding-left: 70px;
+            padding-right: 20px;
+            padding-top: 2.5rem;
+            padding-bottom: 2.5rem;
+            min-height: 80vh;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            color: #4b5563;
+        }
+
+        .fade-transition {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .hidden-screen {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+            transform: scale(0.95);
+        }
+
+        .active-screen {
+            opacity: 1;
+            pointer-events: auto;
+            position: relative;
+            z-index: 10;
+            transform: scale(1);
+        }
+
+        .typewriter-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #ff4d4d;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center relative overflow-hidden text-gray-700">
+
+    <div id="screen-main" class="w-full max-w-md mx-auto p-6 flex flex-col items-center justify-center active-screen fade-transition min-h-screen">
+        
+        <!-- Thought Bubble -->
+        <div class="relative bg-white px-8 py-4 rounded-[2rem] shadow-sm border border-gray-100 float-anim mb-6 z-10 text-center min-w-[200px]">
+            <p id="bubble-text" class="text-xl font-semibold text-gray-600 transition-opacity duration-300">ดีกันนะ 💭</p>
+            <div class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-5 h-5 bg-white border-b border-r border-gray-100 rotate-45"></div>
+        </div>
+
+        <!-- Very Cute Chibi Bear & Goose SVG -->
+        <div class="w-72 h-72 mb-8 relative">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-xl">
+                <!-- Bear Ears -->
+                <circle cx="50" cy="65" r="25" fill="#d4a373" />
+                <circle cx="50" cy="65" r="14" fill="#faedcd" />
+                <circle cx="150" cy="65" r="25" fill="#d4a373" />
+                <circle cx="150" cy="65" r="14" fill="#faedcd" />
+
+                <!-- Bear Head / Body (Super round) -->
+                <rect x="25" y="40" width="150" height="145" rx="70" fill="#d4a373" />
+
+                <!-- Blush -->
+                <ellipse cx="60" cy="115" rx="14" ry="9" fill="#ffb3c6" opacity="0.8" />
+                <ellipse cx="140" cy="115" rx="14" ry="9" fill="#ffb3c6" opacity="0.8" />
+
+                <!-- Snout -->
+                <ellipse cx="100" cy="125" rx="22" ry="16" fill="#faedcd" />
+                <path d="M 94 118 Q 100 125 106 118" fill="none" stroke="#5e3a1f" stroke-width="3" stroke-linecap="round"/>
+                <ellipse cx="100" cy="113" rx="7" ry="5" fill="#5e3a1f" />
+
+                <!-- Sad Eyes -->
+                <path d="M 55 95 Q 65 85 75 95" fill="none" stroke="#5e3a1f" stroke-width="4" stroke-linecap="round" />
+                <path d="M 125 95 Q 135 85 145 95" fill="none" stroke="#5e3a1f" stroke-width="4" stroke-linecap="round" />
+                <!-- Eyebrows (Sad) -->
+                <path d="M 55 75 Q 65 70 75 80" fill="none" stroke="#5e3a1f" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+                <path d="M 125 80 Q 135 70 145 75" fill="none" stroke="#5e3a1f" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+                <!-- Goose Hugging (Bottom) -->
+                <path d="M 50 200 C 50 140, 150 140, 150 200 Z" fill="#ffffff" />
+                <path d="M 30 200 C 30 160, 70 170, 70 200 Z" fill="#ffffff" />
+                <path d="M 170 200 C 170 160, 130 170, 130 200 Z" fill="#ffffff" />
+                
+                <!-- Goose Head -->
+                <circle cx="100" cy="165" r="28" fill="#ffffff" />
+                <!-- Goose Beak -->
+                <path d="M 118 158 L 140 165 L 118 172 Z" fill="#fca311" />
+                <!-- Goose Eye -->
+                <path d="M 105 152 Q 112 145 118 152" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round" />
+
+                <!-- Bear Arms Hugging -->
+                <path d="M 25 120 C 25 160, 60 180, 80 180" fill="none" stroke="#c08c5d" stroke-width="14" stroke-linecap="round" />
+                <path d="M 175 120 C 175 160, 140 180, 120 180" fill="none" stroke="#c08c5d" stroke-width="14" stroke-linecap="round" />
+
+                <!-- Tears -->
+                <circle cx="65" cy="105" r="4.5" fill="#81d4fa" class="tear" />
+                <circle cx="135" cy="105" r="4.5" fill="#81d4fa" class="tear tear-delay" />
+            </svg>
+        </div>
+
+        <!-- Buttons Wrapper: Exact width, absolute positioning for flawless centering -->
+        <div id="btn-wrapper" class="relative w-[320px] h-14 mx-auto mt-4">
+            <button id="btn-yes" class="absolute left-0 w-[150px] bg-pink-400 hover:bg-pink-500 text-white font-bold py-3.5 rounded-full shadow-md transition-all duration-500 ease-in-out z-20 text-lg flex items-center justify-center gap-2">
+                ดีกันน 💖
+            </button>
+            <button id="btn-no" class="absolute right-0 w-[150px] bg-white hover:bg-gray-50 text-gray-500 border border-gray-200 font-bold py-3.5 rounded-full shadow-sm transition-all duration-300 ease-in-out z-10 text-lg origin-center flex items-center justify-center gap-2">
+                ไม่ดี 😤
+            </button>
+        </div>
+    </div>
+
+    <div id="screen-envelope" class="w-full max-w-md mx-auto p-6 flex flex-col items-center justify-center hidden-screen fade-transition min-h-screen cursor-pointer">
+        <p class="text-pink-400 font-semibold mb-10 text-xl animate-pulse">แตะเพื่อเปิดจดหมายนะ 💌</p>
+        <div id="envelope-svg" class="w-72 h-72 wiggle transition-transform hover:scale-105">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-2xl">
+                <!-- Envelope Back -->
+                <rect x="10" y="25" width="180" height="115" fill="#fbcfe8" rx="8" />
+                <!-- Envelope Paper Peeking -->
+                <rect x="25" y="10" width="150" height="100" fill="#ffffff" rx="6" />
+                <!-- Red Line on peeking paper -->
+                <line x1="45" y1="10" x2="45" y2="60" stroke="#ff4d4d" stroke-width="2" />
+                <!-- Paper lines -->
+                <line x1="55" y1="25" x2="160" y2="25" stroke="#e5e7eb" stroke-width="2" />
+                <line x1="55" y1="45" x2="160" y2="45" stroke="#e5e7eb" stroke-width="2" />
+                <line x1="55" y1="65" x2="130" y2="65" stroke="#e5e7eb" stroke-width="2" />
+                
+                <!-- Bear paw holding envelope -->
+                <path d="M -10 100 C 10 90, 30 110, 40 130" fill="none" stroke="#d4a373" stroke-width="20" stroke-linecap="round" />
+                <path d="M 210 100 C 190 90, 170 110, 160 130" fill="none" stroke="#d4a373" stroke-width="20" stroke-linecap="round" />
+
+                <!-- Envelope Front Flaps -->
+                <polygon points="10,25 100,85 190,25 190,140 10,140" fill="#f9a8d4" />
+                <polygon points="10,25 100,95 190,25" fill="#f472b6" />
+                
+                <!-- Heart Seal -->
+                <path d="M100 96 C 100 96, 88 84, 82 90 C 76 96, 82 108, 100 120 C 118 108, 124 96, 118 90 C 112 84, 100 96, 100 96 Z" fill="#ff4d4d" />
+            </svg>
+        </div>
+    </div>
+
+    <div id="screen-letter" class="w-full max-w-2xl mx-auto p-4 md:p-8 flex flex-col items-center justify-start hidden-screen fade-transition min-h-screen pt-8 pb-12">
+        <div class="w-full report-paper relative overflow-hidden">
+            <div id="typewriter-text" class="whitespace-pre-wrap typewriter-cursor relative z-10 font-medium tracking-wide"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let noClickCount = 0;
+            const noMessages = [
+                'เค้าขอโทษ 🥺',
+                'ง้อนะะ 😭',
+                'ดีกันเถอะนะะ 🙏',
+                'เค้าจะไม่ทำงั้นอีกแล้ว 😢',
+                'ดีกันนะ 🥺',
+                'เค้าผิดไปแล้วว 😫',
+                'ใจอ่อนให้หน่อยนะะ 🥺'
+            ];
+
+            const letterContent = "ถึงเธอ\n\nเค้าอยากขอบคุณเธอมากจริงๆ นะ ขอบคุณจากใจเลยที่ยอมเปิดโอกาสให้เค้าได้อยู่ตรงนี้ต่อ ขอบคุณที่ยังใจดีกับคนที่ไม่เอาไหนอย่างเค้า ทั้งที่เค้าทำตัวแย่ใส่เธอขนาดนั้น เค้ารู้ว่าสิ่งที่เค้าทำมันคงทำร้ายความรู้สึกเธอไปเยอะมาก และเค้าก็ไม่รู้เลยว่าตอนนี้เธออาจจะหมดรักหรือรู้สึกกับเค้าน้อยลงไปแล้วรึเปล่า แต่เค้าแค่อยากให้เธอรู้ว่า เค้าจะไม่ปล่อยให้โอกาสครั้งนี้ที่เธอให้มามันสูญเปล่าแน่นอน หลังจากนี้ไป เค้าสัญญาว่าจะปรับปรุงตัว จะทำตัวให้ดีกว่าเดิมในทุกๆวัน จะใส่ใจ จะรับฟัง และทะนุถนอมความรู้สึกของเธอให้สมกับที่เธอให้โอกาสเค้าอีกครั้ง จะไม่ทำให้เธอต้องมานั่งเสียใจกับเรื่องเดิมๆ อีกแล้วนะ\n\nเค้ารักเธอนะเธอ รักมากจริงๆ ขอบคุณที่ยังอยู่ข้างกันยังไม่ปล่อยมือกันนะ ❤️";
+
+            const screenMain = document.getElementById('screen-main');
+            const screenEnvelope = document.getElementById('screen-envelope');
+            const screenLetter = document.getElementById('screen-letter');
+            
+            const btnYes = document.getElementById('btn-yes');
+            const btnNo = document.getElementById('btn-no');
+            const bubbleText = document.getElementById('bubble-text');
+            const typewriterEl = document.getElementById('typewriter-text');
+
+            btnNo.addEventListener('click', () => {
+                if (noClickCount < 5) {
+                    // Update text with fade effect
+                    bubbleText.style.opacity = '0';
+                    setTimeout(() => {
+                        bubbleText.innerText = noMessages[noClickCount % noMessages.length] + ' 💭';
+                        bubbleText.style.opacity = '1';
+                        noClickCount++;
+                        
+                        // Shrink button
+                        const scale = 1 - (noClickCount * 0.15);
+                        btnNo.style.transform = `scale(${scale})`;
+                    }, 150);
+                }
+
+                // After 5 clicks, hide "No" and center "Yes"
+                if (noClickCount === 5) {
+                    setTimeout(() => {
+                        btnNo.style.opacity = '0';
+                        btnNo.style.pointerEvents = 'none';
+                        
+                        bubbleText.style.opacity = '0';
+                        setTimeout(() => {
+                            bubbleText.innerText = 'ดีกันน้าาา พลีสส 🥺💖 💭';
+                            bubbleText.style.opacity = '1';
+                        }, 150);
+                        
+                        // Smoothly center the Yes button using absolute positioning
+                        btnYes.style.left = '50%';
+                        btnYes.style.transform = 'translateX(-50%)';
+                        btnYes.classList.add('animate-bounce');
+                        btnYes.classList.remove('left-0'); // overriding tailwind class explicitly
+                        
+                        // Hide No button completely after transition
+                        setTimeout(() => {
+                            btnNo.style.display = 'none';
+                        }, 300);
+                    }, 200);
+                }
+            });
+
+            btnYes.addEventListener('click', () => {
+                screenMain.classList.remove('active-screen');
+                screenMain.classList.add('hidden-screen');
+                
+                setTimeout(() => {
+                    screenMain.style.display = 'none';
+                    screenEnvelope.style.display = 'flex';
+                    void screenEnvelope.offsetWidth; // trigger reflow
+                    screenEnvelope.classList.remove('hidden-screen');
+                    screenEnvelope.classList.add('active-screen');
+                }, 500);
+            });
+
+            screenEnvelope.addEventListener('click', () => {
+                screenEnvelope.classList.remove('active-screen');
+                screenEnvelope.classList.add('hidden-screen');
+                
+                setTimeout(() => {
+                    screenEnvelope.style.display = 'none';
+                    screenLetter.style.display = 'flex';
+                    void screenLetter.offsetWidth; // trigger reflow
+                    screenLetter.classList.remove('hidden-screen');
+                    screenLetter.classList.add('active-screen');
+                    
+                    // Start Typewriter
+                    startTypewriter(letterContent, typewriterEl, 45);
+                }, 500);
+            });
+
+            function startTypewriter(text, element, speed) {
+                let i = 0;
+                element.innerHTML = ''; 
+                
+                function typeWriter() {
+                    if (i < text.length) {
+                        if (text.charAt(i) === '\n') {
+                            element.innerHTML += '<br>';
+                        } else {
+                            element.innerHTML += text.charAt(i);
+                        }
+                        i++;
+                        setTimeout(typeWriter, speed);
+                    } else {
+                        element.classList.remove('typewriter-cursor');
+                    }
+                }
+                
+                setTimeout(typeWriter, 800);
+            }
+        });
+    </script>
+</body>
+</html>
